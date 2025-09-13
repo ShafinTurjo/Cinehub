@@ -1,4 +1,3 @@
-// pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +9,6 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Replace with real backend call
     if (email === 'test@example.com' && password === '123456') {
       const user = { email };
       localStorage.setItem('user', JSON.stringify(user));

@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MenuIcon, SearchIcon, TicketPlus, XIcon } from 'lucide-react';
 import { assets } from '../assets/assets';
+import { useAppContext } from '../context/AppContext'; // 👈 Import context
+import toast from 'react-hot-toast';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
+  const { user, setUser, setToken, navigate } = useAppContext(); // 👈 Use context
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
-    navigate('/');
+    setToken(null);
+    toast.success("Logged out successfully");
+    navigate('/login');
   };
 
   return (
